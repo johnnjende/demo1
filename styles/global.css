@@ -1,0 +1,205 @@
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: #cbbeff;
+  --background-end-rgb: 255, 255, 255;
+  --callout-rgb: 238, 240, 241;
+  --callout-border-rgb: 172, 175, 176;
+  --card-rgb: #6649ae;
+  --card-border-rgb: 131, 134, 135;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
+  }
+}
+
+* {
+  @apply box-border m-0 p-0;
+}
+
+html,
+body {
+  @apply max-w-[100vw] overflow-x-hidden;
+}
+body {
+  @apply text-[rgb(var(--foreground-rgb))];
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+a {
+  @apply text-inherit no-underline;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.main {
+  @apply flex flex-col justify-between items-center min-h-screen p-24;
+}
+
+.description {
+  @apply text-[0.85rem] max-w-[var(--max-width)] w-full z-[2];
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  font-family: var(--font-mono);
+}
+
+.description a {
+  @apply flex justify-center items-center gap-2;
+}
+
+.description p {
+  @apply relative bg-[rgba(var(--callout-rgb),0.5)] border border-[rgba(var(--callout-border-rgb),0.3)] rounded-[var(--border-radius)] m-0 p-4 border-solid;
+}
+
+.code {
+  @apply font-bold;
+  font-family: var(--font-mono);
+}
+
+.grid {
+  @apply max-w-full w-[var(--max-width)];
+
+  @screen md {
+    grid-template-columns: repeat(4, minmax(25%, auto));
+    display: grid;
+  }
+}
+
+.card {
+  @apply rounded-[var(--border-radius)] border border-[rgba(var(--card-border-rgb),0)] px-[1.2rem] py-4 border-solid;
+  background: rgba(var(--card-rgb), 0);
+  transition: background 200ms, border 200ms, box-shadow 200ms;
+}
+
+.card span {
+  @apply inline-block transition-transform duration-200;
+}
+
+.card h2 {
+  @apply font-semibold mb-[0.7rem];
+}
+
+.card p {
+  @apply opacity-60 text-[0.9rem] leading-normal max-w-[30ch] m-0;
+}
+
+.center {
+  @apply flex justify-center items-center relative gap-16 px-0 py-16;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    @apply border border-[rgba(var(--card-border-rgb),0.15)] shadow-[0px_4px_12px_0px_#CBBEFF] border-solid;
+    background: rgba(var(--card-rgb), 0.1);
+  }
+  .card:hover span {
+    @apply translate-x-1;
+  }
+  @media (prefers-color-scheme: dark) {
+    .card:hover {
+      @apply shadow-none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .card:hover span {
+    transform: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .content {
+    @apply p-16;
+  }
+  .grid {
+    @apply grid-cols-[1fr] max-w-xs text-center mb-[120px];
+  }
+  .card {
+    @apply px-10 py-4;
+  }
+  .card h2 {
+    @apply mb-2;
+  }
+  .center {
+    @apply pt-32 pb-24 px-0 before:h-[300px];
+  }
+  .center::before {
+    transform: none;
+  }
+  .description {
+    @apply text-[0.8rem];
+  }
+  .description a {
+    @apply p-4;
+  }
+  .description p,
+  .description div {
+    @apply flex justify-center fixed w-full;
+  }
+  .description p {
+    @apply items-center border-b-[rgba(var(--callout-border-rgb),0.25)] bg-clip-padding backdrop-blur-xl pt-8 pb-[1.4rem] px-4 rounded-none border-[none] border-b border-solid inset-[0_0_auto];
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--background-start-rgb), 1),
+      rgba(var(--callout-rgb), 0.5)
+    );
+  }
+  .description div {
+    @apply items-end pointer-events-none h-[200px] z-[1] p-8 inset-[auto_0_0];
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(var(--background-end-rgb)) 40%
+    );
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  .grid {
+    @apply grid-cols-[repeat(2,50%)];
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+}
+
+@keyframes rotate {
+  from {
+    @apply rotate-[360deg];
+  }
+  to {
+    @apply rotate-0;
+  }
+}
