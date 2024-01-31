@@ -6,7 +6,11 @@ Learn more: https://docs.amplify.aws/gen2/start/quickstart/
 
 ### Getting Started
 
-First, run the development server:
+```bash
+npm install run
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
